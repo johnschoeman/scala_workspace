@@ -154,3 +154,24 @@ val json123 = JsSeqCell(JsDouble(1.0), JsSeqCell(JsDouble(2.0), JsSeqCell(JsDoub
 val jsonabc = JsSeqCell(JsString("a"), JsSeqCell(JsString("b"), JsSeqCell(JsString("c"), JsSeqEnd)))
 val jsondoh = JsObjCell(JsString("doh"), JsBoolean(true), JsObjCell(JsString("ray"), JsBoolean(false), JsObjCell(JsString("me"), JsDouble(1.0), JsObjEnd)))
 val jsonobj = JsObjCell(JsString("a"), json123, JsObjCell(JsString("b"), jsonabc, JsObjCell(JsString("c"), jsondoh, JsObjEnd)))
+
+//4.7.0.3 Music
+//
+// Music format:Format genre:Genre artist:Artist
+//
+// Format ::= Recorded
+//          | Live
+//
+// Genre ::= Rock
+//         | Jazz
+//
+// Artist name: String
+
+case class Music(format: Format, genre: Genre, artist: Artist)
+sealed trait Format
+case object Recorded extends Format
+case object Live extends Format
+sealed trait Genre
+case object Rock extends Genre
+case object Jazz extends Genre
+case class Artist(name: String)
