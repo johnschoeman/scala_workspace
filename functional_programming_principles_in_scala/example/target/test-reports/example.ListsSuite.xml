@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite hostname="susans-MacBook-Pro.local" name="example.ListsSuite" tests="9" errors="0" failures="0" skipped="0" time="0.013">
+                     <properties>
+      <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/><property name="java.specification.version" value="12"/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="java.vendor.url" value="https://java.oracle.com/"/><property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib"/><property name="sun.java.command" value="/usr/local/Cellar/sbt/1.2.8/libexec/bin/sbt-launch.jar"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2019-04-16"/><property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="Zero based"/><property name="line.separator" value="
+"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="12.0.1+12"/><property name="user.name" value="john"/><property name="file.encoding" value="UTF-8"/><property name="java.io.tmpdir" value="/var/folders/f_/kjg9gd0n719fd5lc6h1x18140000gp/T/"/><property name="java.version" value="12.0.1"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="java.library.path" value="/Users/john/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/><property name="java.vendor" value="Oracle Corporation"/><property name="scala.ext.dirs" value="/Users/john/.sbt/0.13/java9-rt-ext-oracle_corporation_12_0_1"/><property name="sun.io.unicode.encoding" value="UnicodeBig"/><property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="java.class.path" value="/usr/local/Cellar/sbt/1.2.8/libexec/bin/sbt-launch.jar"/><property name="java.vm.vendor" value="Oracle Corporation"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="America/New_York"/><property name="java.vm.specification.version" value="12"/><property name="os.name" value="Mac OS X"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="US"/><property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/Users/john"/><property name="user.language" value="en"/><property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/><property name="jline.esc.timeout" value="0"/><property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/><property name="path.separator" value=":"/><property name="os.version" value="10.14.4"/><property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/><property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/><property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/><property name="user.dir" value="/Users/john/workspace/scala_workspace/functional_programming_principles_in_scala/example"/><property name="os.arch" value="x86_64"/><property name="java.vm.info" value="mixed mode, sharing"/><property name="java.vm.version" value="12.0.1+12"/><property name="java.class.version" value="56.0"/>
+    </properties>
+                     <testcase classname="example.ListsSuite" name="one plus one is two" time="0.008">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="one plus one is three?" time="0.0">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="details why one plus one is not three" time="0.003">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="intNotZero throws an exception if its argument is 0" time="0.0">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="sum of a few numbers" time="0.001">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="empty list" time="0.0">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="negative numbers" time="0.001">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="max of a few numbers" time="0.0">
+                                                 
+                                               </testcase><testcase classname="example.ListsSuite" name="repeated elements" time="0.0">
+                                                 
+                                               </testcase>
+                     <system-out></system-out>
+                     <system-err></system-err>
+                   </testsuite>
