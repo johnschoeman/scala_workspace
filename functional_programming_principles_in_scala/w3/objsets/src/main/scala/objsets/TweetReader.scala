@@ -4,7 +4,7 @@ object TweetReader {
 
   object ParseTweets {
     import scala.util.parsing.json._
-    
+
     def getList[T](s: String): List[T] =
       JSON.parseFull(s).get.asInstanceOf[List[T]]
 
