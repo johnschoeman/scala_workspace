@@ -1,3 +1,5 @@
+import phone._
+
 object w6 extends App {
   // 6.1 Other Collections
   val xs = Array(1,2,3,4)
@@ -46,8 +48,8 @@ object w6 extends App {
     persons filter (p => p.age > 20) map (p => p.name)
   }
   val persons: List[Person] = List(new Person("a", 19), new Person("b", 20), new Person("c", 21))
-  println(forComp1(persons))
-  println(forComp2(persons))
+  // println(forComp1(persons))
+  // println(forComp2(persons))
 
   val n = 7
   def primePairs(n: Int) = {
@@ -62,8 +64,8 @@ object w6 extends App {
       if isPrime(i + j)
     } yield (i, j)
   }
-  println(primePairs(n))
-  println(primePairs2(n))
+  // println(primePairs(n))
+  // println(primePairs2(n))
 
 
   def scalarProductComp(xs: Vector[Double], ys: Vector[Double]): Double = {
@@ -73,7 +75,7 @@ object w6 extends App {
     } yield (x + y)).sum
   }
 
-  println(scalarProductComp(Vector(1.0,2.0),Vector(3.0,4.0)))
+  // println(scalarProductComp(Vector(1.0,2.0),Vector(3.0,4.0)))
 
   // 6.3 Combinatorial Search Example
 
@@ -189,5 +191,8 @@ object w6 extends App {
   val p1 = new Poly(1 -> 2.0, 3 -> 4.0, 5 -> 6.2)
   val p2 = new Poly(0 -> 3.0, 3 -> 7.0)
 
-  println(p1 + p2)
+  // println(p1 + p2)
+
+  // 6.5 Combining it all together
+  Phone
 }
