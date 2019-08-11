@@ -4,24 +4,24 @@ case class Pouring(capacity: Vector[Int]) {
   type State = Vector[Int]
   val initialState: State = capacity map (x => 0)
 
-  trait Move
-  case class Empty(glass: Int) extends Move
-  case class Fill(glass: Int) extends Move
-  case class Pour(from: Int, to: Int) extends Move
-
-  def makeMove(move: Move, state: State): State = {
-    move match {
-      case Empty(glass) => state.updated(glass, 0)
-      case Fill(glass) => state.updated(glass, capacity(glass))
-      case Pour(from, to) => {
-        val fromAmt: Int = state(from)
-        val toAmt: Int = state(to)
-        val maxAvail: Int = capacity(to) - toAmt
-        if (fromAmt <= maxAvail) {
-          state.updated(from, 0).updated(to, toAmt + fromAmt)
-        } else {
-          state.updated(from, fromAmt - maxAvail).updated(to, toAmt + maxAvail)
-        }
+  trait Move {
+    def update(state: State): State
+  }
+  case class Empty(glass: Int) extends Move {
+    def update(state: State): State = state.updated(glass, 0)
+  }
+  case class Fill(glass: Int) extends Move {
+    def update(state: State): State = state.updated(glass, capacity(glass))
+  }
+  case class Pour(from: Int, to: Int) extends Move {
+    def update(state: State): State = {
+      val fromAmt: Int = state(from)
+      val toAmt: Int = state(to)
+      val maxAvail: Int = capacity(to) - toAmt
+      if (fromAmt <= maxAvail) {
+        state.updated(from, 0).updated(to, toAmt + fromAmt)
+      } else {
+        state.updated(from, fromAmt - maxAvail).updated(to, toAmt + maxAvail)
       }
     }
   }
@@ -60,7 +60,7 @@ case class Pouring(capacity: Vector[Int]) {
     }
 
     def addMovesToState(state: State): List[(Move, State)] = {
-      moves map { (move: Move) => (move, makeMove(move, state)) }
+      moves map { (move: Move) => (move, move.update(state)) }
     }
 
     def nextStates(state: => State): Stream[Stream[Path]] = {

@@ -7,18 +7,6 @@ class PouringSuite extends FunSuite  {
     // assert(Pouring(Vector(4,9)).sovleFor(6) == List())
   }
 
-  test("Can make moves") {
-    val pour = Pouring(Vector(4,9))
-    assert(pour.makeMove(pour.Fill(0), Vector(0,0)) == Vector(4,0))
-    assert(pour.makeMove(pour.Fill(1), Vector(0,0)) == Vector(0,9))
-    assert(pour.makeMove(pour.Empty(0), Vector(4,9)) == Vector(0,9))
-    assert(pour.makeMove(pour.Empty(1), Vector(4,9)) == Vector(4,0))
-    assert(pour.makeMove(pour.Pour(0,1), Vector(4,1)) == Vector(0,5))
-    assert(pour.makeMove(pour.Pour(0,1), Vector(4,7)) == Vector(2,9))
-    assert(pour.makeMove(pour.Pour(1,0), Vector(4,7)) == Vector(4,7))
-    assert(pour.makeMove(pour.Pour(1,0), Vector(1,7)) == Vector(4,4))
-  }
-
   test("Comes up with a correct solution") {
     val pour = Pouring(Vector(4,9))
     val solution = pour.solveFor(6)
