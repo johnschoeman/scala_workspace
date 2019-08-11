@@ -35,9 +35,9 @@ case class Pouring(capacity: Vector[Int]) {
       (for (from <- glasses; to <- glasses; if from != to) yield Pour(from, to))
     ).toList
 
-  case class Path(states: List[(Move, State)]) {
+  case class Path(states: List[Move]) {
     def endState: State = {
-      states.head._2
+      states.foldRight(initialState) { _ update _ }
     }
 
     override def toString: String = {
@@ -53,19 +53,18 @@ case class Pouring(capacity: Vector[Int]) {
     }
 
     def addMovesToPath(path: Path): List[Path] = {
-      val states = path.states
-      val lastState: State = states.head._2
+      val lastState: State = path.endState
 
-      addMovesToState(lastState).map { (tuple: (Move, State)) => Path(tuple :: path.states) }
+      addMovesToState(lastState).map { (move: Move) => Path(move :: path.states) }
     }
 
-    def addMovesToState(state: State): List[(Move, State)] = {
-      moves map { (move: Move) => (move, move.update(state)) }
+    def addMovesToState(state: State): List[Move] = {
+      moves map { (move: Move) => move }
     }
 
     def nextStates(state: => State): Stream[Stream[Path]] = {
       lazy val results: Stream[Stream[Path]] = {
-        Stream(Path(List((Empty(0), state)))) #:: (results map addMovesToPaths)
+        Stream(Path(List())) #:: (results map addMovesToPaths)
       }
       results
     }
@@ -74,7 +73,7 @@ case class Pouring(capacity: Vector[Int]) {
   }
 
   def isAtTarget(targetVolume: Int)(path: Path): Boolean = {
-    path.states.head._2.contains(targetVolume)
+    path.endState contains targetVolume
   }
 
   def hasAValidPath(rung: List[Path], targetVolume: Int): Boolean = {
@@ -88,7 +87,10 @@ case class Pouring(capacity: Vector[Int]) {
   def isNotEmpty(rung: Stream[Path]): Boolean = rung.length > 0
 
   def solveFor(targetVolume: Int): Path = {
-    generateRungs.map(validPaths(_, targetVolume)).filter(isNotEmpty(_)).take(1).toList.head.take(1).toList.head
+    generateRungs
+      .map(validPaths(_, targetVolume))
+      .filter(isNotEmpty(_))
+      .take(1).toList.head.take(1).toList.head
   }
 
   override def toString: String = {
