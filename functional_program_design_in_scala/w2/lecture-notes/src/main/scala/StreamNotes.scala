@@ -7,6 +7,11 @@ class StreamNotes {
     else Stream.cons(lo, streamRange(lo + 1, hi))
   }
 
+  def listRange(lo: Int, hi: Int): List[Int] = {
+    if (lo >= hi) Nil
+    else lo :: listRange(lo + 1, hi)
+  }
+
   // println(streamRange(1, 10).take(8).toList)
 
   def from(n: Int): Stream[Int] = n #:: from(n + 1)
