@@ -45,22 +45,8 @@ case class Pouring(capacity: Vector[Int]) {
     }
   }
 
-  def generateRungs: Stream[Stream[Path]] = {
+  def rungs: Stream[Stream[Path]] = {
     val state: State = initialState
-
-    def addMovesToPaths(paths: Stream[Path]): Stream[Path] = {
-      paths.flatMap { (path: Path) => addMovesToPath(path) }
-    }
-
-    def addMovesToPath(path: Path): List[Path] = {
-      val lastState: State = path.endState
-
-      addMovesToState(lastState).map { (move: Move) => Path(move :: path.states) }
-    }
-
-    def addMovesToState(state: State): List[Move] = {
-      moves map { (move: Move) => move }
-    }
 
     def nextStates(state: => State): Stream[Stream[Path]] = {
       lazy val results: Stream[Stream[Path]] = {
@@ -69,31 +55,21 @@ case class Pouring(capacity: Vector[Int]) {
       results
     }
 
+    def addMovesToPaths(paths: Stream[Path]): Stream[Path] = {
+      for {
+        path <- paths
+        move <- moves
+      } yield (Path(move :: path.states))
+    }
     nextStates(initialState)
   }
 
-  def isAtTarget(targetVolume: Int)(path: Path): Boolean = {
-    path.endState contains targetVolume
-  }
-
-  def hasAValidPath(rung: List[Path], targetVolume: Int): Boolean = {
-    rung exists isAtTarget(targetVolume)
-  }
-
-  def validPaths(rung: Stream[Path], targetVolume: Int): Stream[Path] = {
-    rung filter isAtTarget(targetVolume)
-  }
-
-  def isNotEmpty(rung: Stream[Path]): Boolean = rung.length > 0
-
   def solveFor(targetVolume: Int): Path = {
-    generateRungs
-      .map(validPaths(_, targetVolume))
-      .filter(isNotEmpty(_))
-      .take(1).toList.head.take(1).toList.head
-  }
-
-  override def toString: String = {
-    moves.mkString(",")
+    (for {
+      rung <- rungs
+      path <- rung
+      if path.endState contains targetVolume
+    } yield path
+    ).take(1).toList.head
   }
 }
