@@ -35,41 +35,35 @@ case class Pouring(capacity: Vector[Int]) {
       (for (from <- glasses; to <- glasses; if from != to) yield Pour(from, to))
     ).toList
 
-  case class Path(states: List[Move]) {
-    def endState: State = {
-      states.foldRight(initialState) { _ update _ }
-    }
+  case class Path(history: List[Move], val endState: State) {
+    def extend(move: Move): Path = new Path(move :: history, move update endState)
 
     override def toString: String = {
-      states.reverse.mkString(" -> ") + " : " + endState
+      history.reverse.mkString(" -> ") + " : " + endState
     }
   }
 
-  def rungs: Stream[Stream[Path]] = {
-    val state: State = initialState
+  val initialPath: Path = Path(Nil, initialState)
 
-    def nextStates(state: => State): Stream[Stream[Path]] = {
-      lazy val results: Stream[Stream[Path]] = {
-        Stream(Path(List())) #:: (results map addMovesToPaths)
-      }
-      results
-    }
-
-    def addMovesToPaths(paths: Stream[Path]): Stream[Path] = {
-      for {
+  def from(paths: Set[Path], explored: Set[State]): Stream[Set[Path]] = {
+    if (paths.isEmpty) Stream.empty
+    else {
+      val more = for {
         path <- paths
-        move <- moves
-      } yield (Path(move :: path.states))
+        next <- moves map path.extend
+        if !(explored contains next.endState)
+      } yield next
+      paths #:: from(more, explored ++ (more map (_.endState)))
     }
-    nextStates(initialState)
   }
 
-  def solveFor(targetVolume: Int): Path = {
-    (for {
-      rung <- rungs
-      path <- rung
+  val pathSets: Stream[Set[Path]] = from(Set(initialPath), Set(initialState))
+
+  def solutions(targetVolume: Int): Stream[Path] = {
+    for {
+      pathSet <- pathSets
+      path <- pathSet
       if path.endState contains targetVolume
     } yield path
-    ).take(1).toList.head
   }
 }
